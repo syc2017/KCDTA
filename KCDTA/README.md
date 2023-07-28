@@ -41,7 +41,7 @@ You need to run the following
 ``` python
 python test.py 0
 ```
-arguments *0/1/2* represent ***Davis, KIBA, PDBBind Renfined*** datasets respectively.This operation will test the model generated during the training phase with the selected dataset to obtain the final result.
+arguments *0/1/2* represent ***Davis, KIBA, PDBBind Refined*** datasets respectively.This operation will test the model generated during the training phase with the selected dataset to obtain the final result.
 
 It is worth noting that if you want to reproduce our experimental results, regarding the Davis, KIBA data set, only the fifth of the five folds was created in the **create_davis_kiba_pdb.py** we provided.
 
@@ -72,9 +72,9 @@ train_fold3 = [ee for e in train_fold1[4:5] for ee in e]
 train_fold =train_fold2+train_fold3
 test_fold = [ee for e in train_fold1[3:4] for ee in e]
 ```
-After modifying the code according to the above operations, execute **create_davis_kiba_pdb.py** to create a dataset (every time you create a dataset, you need to check whether there is a processd directory under the data folder, and delete it if it exists), and copy the model parameters from the cloud disk we provided to Under the KC-DTA directory, note that the names of the model parameters need to be changed to ***model_cnn_davis*** and ***model_cnn_kiba*** according to the Davis dataset and the KIBA dataset respectively(For example, modify the ***first fold.model*** in the davisvest directory to ***model_cnn_davis***).
+After modifying the code according to the above operations, execute **create_davis_kiba_pdb.py** to create a dataset (every time you create a dataset, you need to check whether there is a processd directory under the data folder, and delete it if it exists), and copy the model parameters from the cloud disk we provided to Under the KC-DTA directory, note that the names of the model parameters need to be changed to ***model_cnn_davis*** and ***model_cnn_kiba*** according to the Davis dataset and the KIBA dataset respectively(For example, modify the ***first fold*** in the davisvest directory to ***model_cnn_davis***).
 
-For the results of reproducing the **PDBBind Renfined** dataset, no code modification is required, just copy the model parameters from the network disk to the KCDTA directory after creating the dataset, and execute
+For the results of reproducing the **PDBBind Refined** dataset, no code modification is required, just copy the model parameters from the network disk to the KCDTA directory after creating the dataset, and execute
 ``` python
 python test.py 2
 ```
