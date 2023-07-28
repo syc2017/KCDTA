@@ -72,9 +72,9 @@ train_fold3 = [ee for e in train_fold1[4:5] for ee in e]
 train_fold =train_fold2+train_fold3
 test_fold = [ee for e in train_fold1[3:4] for ee in e]
 ```
-After modifying the code according to the above operations, execute **create_davis_kiba_pdb.py** to create a dataset (every time you create a dataset, you need to check whether there is a processd directory under the data folder, and delete it if it exists), and copy the model parameters from the cloud disk we provided to Under the KC-DTA directory, note that the names of the model parameters need to be changed to ***model_cnn_davis*** and ***model_cnn_kiba*** according to the **Davis** dataset and the **KIBA** dataset respectively(For example, modify the ***first fold*** in the **davisbest** directory to ***model_cnn_davis***).
+After modifying the code according to the above operations, execute **create_davis_kiba_pdb.py** to create a dataset (every time you create a dataset, you need to check whether there is a processd directory under the data folder, and delete it if it exists), and copy the model parameters from the cloud disk(https://drive.google.com/file/d/1bYSP-UjqTsUOKk3JQHCb_EX3TG2oxhqk/view?usp=drive_link) we provided to Under the KC-DTA directory, note that the names of the model parameters need to be changed to ***model_cnn_davis*** and ***model_cnn_kiba*** according to the **Davis** dataset and the **KIBA** dataset respectively(For example, modify the ***first fold*** in the **davisbest** directory to ***model_cnn_davis***).
 
-For the results of reproducing the **PDBBind Refined** dataset, no code modification is required, just copy the model parameters from the network disk to the KCDTA directory after creating the dataset, and execute
+For the results of reproducing the **PDBBind Refined** dataset, no code modification is required, just copy the model parameters from the cloud disk(https://drive.google.com/file/d/1bYSP-UjqTsUOKk3JQHCb_EX3TG2oxhqk/view?usp=drive_link) to the KCDTA directory after creating the dataset, and execute
 ``` python
 python test.py 2
 ```
@@ -85,4 +85,4 @@ python metztest.py 0
 ```
 arguments *0/1/2* represent ***metz1,metz2,metz3*** datasets respectively.This operation will test the model generated during the training phase with the selected dataset to obtain the final result.
 
-If you want to reproduce our results, you need to copy the model parameters from the cloud disk to the directory of KCDTA , and execute the commands corresponding to the **Metz** dataset without modifying any code
+If you want to reproduce our results, you need to copy the model parameters from the cloud disk(https://drive.google.com/file/d/1bYSP-UjqTsUOKk3JQHCb_EX3TG2oxhqk/view?usp=drive_link) to the directory of KCDTA , and execute the commands corresponding to the **Metz** dataset without modifying any code
