@@ -72,7 +72,7 @@ train_fold3 = [ee for e in train_fold1[4:5] for ee in e]
 train_fold =train_fold2+train_fold3
 test_fold = [ee for e in train_fold1[3:4] for ee in e]
 ```
-After modifying the code according to the above operations, execute **create_davis_kiba_pdb.py** to create a dataset (every time you create a dataset, you need to check whether there is a processd directory under the data folder, and delete it if it exists), and copy the model parameters from the cloud disk we provided to Under the KC-DTA directory, note that the names of the model parameters need to be changed to ***model_cnn_davis*** and ***model_cnn_kiba*** according to the Davis dataset and the KIBA dataset respectively.
+After modifying the code according to the above operations, execute **create_davis_kiba_pdb.py** to create a dataset (every time you create a dataset, you need to check whether there is a processd directory under the data folder, and delete it if it exists), and copy the model parameters from the cloud disk we provided to Under the KC-DTA directory, note that the names of the model parameters need to be changed to ***model_cnn_davis*** and ***model_cnn_kiba*** according to the Davis dataset and the KIBA dataset respectively(For example, modify the ***first fold.model*** in the davisvest directory to ***model_cnn_davis***).
 
 For the results of reproducing the **PDBBind Renfined** dataset, no code modification is required, just copy the model parameters from the network disk to the KCDTA directory after creating the dataset, and execute
 ``` python
