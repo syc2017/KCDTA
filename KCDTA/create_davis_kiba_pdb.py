@@ -14,11 +14,9 @@ for dataset in datasets:
     print('convert data from DeepDTA for ', dataset)
     fpath = 'data/' + dataset + '/'
     train_fold1 = json.load(open(fpath + "folds/train_fold_setting1.txt"))
-    # fourth fold
-    train_fold2 = [ee for e in train_fold1[0:3] for ee in e]
-    train_fold3 = [ee for e in train_fold1[4:5] for ee in e]
-    train_fold =train_fold2+train_fold3
-    test_fold = [ee for e in train_fold1[3:4] for ee in e]
+    # fifth fold
+    train_fold = [ee for e in train_fold1[1:5] for ee in e]
+    test_fold = [ee for e in train_fold1[0:1] for ee in e]
     com_fold = json.load(open(fpath + "folds/test_fold_setting1.txt"))
     ligands = json.load(open(fpath + "ligands_can.txt"), object_pairs_hook=OrderedDict)
     # ligands1=ligands1.update(ligands)
