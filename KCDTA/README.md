@@ -1,7 +1,7 @@
 # Resources:
 ## Source codes:
 - **create_davis_kiba_pdb.py** is to convert ***Davis*** dataset,***KIBA*** dataset and ***PDBBind Refined*** dataset into pytorch format. Lines 121 to 154 involve processing protein sequences into three-dimensional matrices using the k-mers method and storing them in the **pro_dic** dictionary. Lines 177 to 202 involve processing protein sequences into two-dimensional matrices using the Cartesian product method and storing them in the **dpro_dic** dictionary. Small molecules are converted into graphs using the **smile_to_graph** function, and lines 170 to 173 store these graphs in the **smile_graph** dictionary.
-- **create_metz.py** is to convert Metz dataset into pytorch format.The method and parameter names for transforming protein and small molecule sequences in the Metz dataset are identical to those in ***create_davis_kiba_pdb.py***, with the only difference being the change in location
+- **create_metz.py** is to convert Metz dataset into pytorch format. The method and parameter names for transforming protein and small molecule sequences in the Metz dataset are identical to those in ***create_davis_kiba_pdb.py***, with the only difference being the change in location
 - **test.py** is used to test the accuracy of Davis, KIBA and PDBBind Refined datasets.
 - **metz_test.py** is used to test the accuracy of Metz dataset.
 - **training.py** is used to train the model of the dataset.
