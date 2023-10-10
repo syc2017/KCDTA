@@ -1,10 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from torch.nn import Sequential, Linear, ReLU
-from torch_geometric.nn import GINConv, global_add_pool
-from torch_geometric.nn import global_mean_pool as gap, global_max_pool as gmp
-
+from torch_geometric.nn import GCNConv, global_max_pool as gmp
 
 class cnn(nn.Module):
     def __init__(self, n_output=1, num_features_xd=78, output_dim=128, dropout=0.2):
@@ -33,37 +30,11 @@ class cnn(nn.Module):
         self.pfc2 = nn.Linear(2048, 1024)
         self.pfc3 = nn.Linear(1024, output_dim)
 
-        # # drug
-        # self.conv1 = GCNConv(num_features_xd, num_features_xd)
-        # self.conv2 = GCNConv(num_features_xd, num_features_xd * 2)
-        # self.conv3 = GCNConv(num_features_xd * 2, num_features_xd * 4)
-        # self.fc_g1 = torch.nn.Linear(num_features_xd * 4, 1024)
-        # self.fc_g2 = torch.nn.Linear(1024, output_dim)
-
-        # drud
-        dim = 32
-        # convolution layers
-        nn1 = Sequential(Linear(num_features_xd, dim), ReLU(), Linear(dim, dim))
-        self.conv1 = GINConv(nn1)
-        self.bn1 = torch.nn.BatchNorm1d(dim)
-
-        nn2 = Sequential(Linear(dim, dim), ReLU(), Linear(dim, dim))
-        self.conv2 = GINConv(nn2)
-        self.bn2 = torch.nn.BatchNorm1d(dim)
-
-        nn3 = Sequential(Linear(dim, dim), ReLU(), Linear(dim, dim))
-        self.conv3 = GINConv(nn3)
-        self.bn3 = torch.nn.BatchNorm1d(dim)
-
-        nn4 = Sequential(Linear(dim, dim), ReLU(), Linear(dim, dim))
-        self.conv10 = GINConv(nn4)
-        self.bn4 = torch.nn.BatchNorm1d(dim)
-
-        nn5 = Sequential(Linear(dim, dim), ReLU(), Linear(dim, dim))
-        self.conv11 = GINConv(nn5)
-        self.bn5 = torch.nn.BatchNorm1d(dim)
-
-        self.fc1_xd = Linear(dim, output_dim)
+        self.conv1 = GCNConv(num_features_xd, num_features_xd)
+        self.conv2 = GCNConv(num_features_xd, num_features_xd*2)
+        self.conv3 = GCNConv(num_features_xd*2, num_features_xd * 4)
+        self.fc_g1 = torch.nn.Linear(num_features_xd*4, 1024)
+        self.fc_g2 = torch.nn.Linear(1024, output_dim)
 
         # dpFNN
         self.ddfc1 = nn.Linear(256, 1024)
@@ -78,11 +49,16 @@ class cnn(nn.Module):
     def forward(self, data):
         # get graph input
         x, edge_index, batch = data.x, data.edge_index, data.batch
-        # get protein input , "target" represents the protein processed by k-mers, and "dcpro" represents the protein processed by Cartesian product operation
+        # get protein input
+        # target = data.target
+        # target = target.unsqueeze(1)
+        # drug = data.drug
+        # drug = drug.unsqueeze(1)
         target = data.target
         target = target.unsqueeze(1)
         dcpro = data.dcpro
         dcpro = dcpro.unsqueeze(1)
+
 
         xd = self.conv7(dcpro)
         xd = self.relu(xd)
@@ -134,19 +110,22 @@ class cnn(nn.Module):
         xt = self.dropout(xt)
 
 
-        x = F.relu(self.conv1(x, edge_index))
-        x = self.bn1(x)
-        x = F.relu(self.conv2(x, edge_index))
-        x = self.bn2(x)
-        x = F.relu(self.conv3(x, edge_index))
-        x = self.bn3(x)
-        x = F.relu(self.conv10(x, edge_index))
-        x = self.bn4(x)
-        x = F.relu(self.conv11(x, edge_index))
-        x = self.bn5(x)
-        x = global_add_pool(x, batch)
-        x = F.relu(self.fc1_xd(x))
-        x = F.dropout(x, p=0.2, training=self.training)
+        x = self.conv1(x, edge_index)
+        x = self.relu(x)
+
+        x = self.conv2(x, edge_index)
+        x = self.relu(x)
+
+        x = self.conv3(x, edge_index)
+        x = self.relu(x)
+        x = gmp(x, batch)       # global max pooling
+
+        # flatten
+        x = self.relu(self.fc_g1(x))
+        x = self.dropout(x)
+        x = self.fc_g2(x)
+        x = self.dropout(x)
+
 
         xq = torch.cat((xd,xt) , 1)
 
