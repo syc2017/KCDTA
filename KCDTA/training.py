@@ -50,8 +50,8 @@ if len(sys.argv) > 3:
     cuda_name = "cuda:" + str(int(sys.argv[3]))
 print('cuda_name:', cuda_name)
 
-# TRAIN_BATCH_SIZE = 512
-# TEST_BATCH_SIZE = 512
+TRAIN_BATCH_SIZE = 512
+TEST_BATCH_SIZE = 512
 LR = 0.0005
 LOG_INTERVAL = 20
 NUM_EPOCHS = 1000
@@ -69,9 +69,6 @@ for dataset in datasets:
     else:
         train_data = TestbedDataset(root='data', dataset=dataset + '_train')
         test_data = TestbedDataset(root='data', dataset=dataset + '_test')
-
-        TRAIN_BATCH_SIZE =512
-        TEST_BATCH_SIZE = 512
         # make data PyTorch mini-batch processing ready
         train_loader = DataLoader(train_data, batch_size=TRAIN_BATCH_SIZE, shuffle=True)
         test_loader = DataLoader(test_data, batch_size=TEST_BATCH_SIZE, shuffle=False)
