@@ -41,7 +41,7 @@ def predicting(model, device, loader):
     return total_labels.numpy().flatten(), total_preds.numpy().flatten()
 
 
-datasets = [['davis', 'kiba','pdb','metz1','metz2','metz3'][int(sys.argv[1])]]
+datasets = [['davis', 'kiba','metz1','metz2','metz3'][int(sys.argv[1])]]
 modeling = [cnn][int(sys.argv[2])]
 model_st = modeling.__name__
 
@@ -69,12 +69,9 @@ for dataset in datasets:
     else:
         train_data = TestbedDataset(root='data', dataset=dataset + '_train')
         test_data = TestbedDataset(root='data', dataset=dataset + '_test')
-        if(dataset=='pdb'):
-            TRAIN_BATCH_SIZE =128
-            TEST_BATCH_SIZE = 128
-        else:
-            TRAIN_BATCH_SIZE =512
-            TEST_BATCH_SIZE = 512
+
+        TRAIN_BATCH_SIZE =512
+        TEST_BATCH_SIZE = 512
         # make data PyTorch mini-batch processing ready
         train_loader = DataLoader(train_data, batch_size=TRAIN_BATCH_SIZE, shuffle=True)
         test_loader = DataLoader(test_data, batch_size=TEST_BATCH_SIZE, shuffle=False)
