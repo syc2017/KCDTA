@@ -106,7 +106,7 @@ def smile_to_graph(smile):
 
 # Put all the protein sequences into the array pro
 pro = []
-for dt_name in ['davis','kiba','pdb']:
+for dt_name in ['davis','kiba']:
     opts = ['train','test','com']
     for opt in opts:
         df = pd.read_csv('data/' + dt_name + '_' + opt + '.csv')
@@ -155,7 +155,7 @@ for k in pro:
 
 # Place all the small molecule sequences into the array compound_iso_smiles
 compound_iso_smiles = []
-for dt_name in ['davis','kiba','pdb']:
+for dt_name in ['davis','kiba']:
     opts = ['train','test','com']
     for opt in opts:
         df = pd.read_csv('data/' + dt_name + '_' + opt + '.csv')
@@ -202,7 +202,7 @@ for k in pro :
     dpro_dic[k] = arg22
 
 
-datasets = ['davis','kiba','pdb']
+datasets = ['davis','kiba']
 
 for dataset in datasets:
     processed_data_file_train = 'data/processed/' + dataset + '_train.pt'
