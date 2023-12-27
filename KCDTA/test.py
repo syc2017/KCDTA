@@ -62,7 +62,7 @@ def predicting(model, device, loader):
             total_labels = torch.cat((total_labels, data.y.view(-1, 1).cpu()), 0)
     return total_labels.numpy().flatten(),total_preds.numpy().flatten()
 
-datasets = [['davis', 'kiba','pdb'][int(sys.argv[1])]]
+datasets = [['davis', 'kiba'][int(sys.argv[1])]]
 for dataset in datasets:
    #"com_data" is an independent test set for KC-DTA.
    com_data = TestbedDataset(root='data', dataset=dataset+'_com')
@@ -78,12 +78,9 @@ for dataset in datasets:
 
 
    G,P = predicting(model, device, com_loader)
-   ret1 = [rmse(G, P), ci(G, P)]
-   ret2 = [ci(G, P),mse(G, P), get_rm2(G,P)]
-   if(dataset=='pdb'):
-     print(ret1)
-   else:
-     print(ret2)
+
+   ret1 = [ci(G, P),mse(G, P), get_rm2(G,P)]
+   print(ret1)
 
 
 
