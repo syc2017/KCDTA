@@ -45,12 +45,12 @@ arguments *0/1* represent ***Davis, KIBA*** datasets respectively.This operation
 
 It is worth noting that if you want to reproduce our experimental results, regarding the **Davis, KIBA** dataset, only the fifth of the five folds was created in the **create_davis_kiba.py** we provided.
 
-If you want to reproduce the first fold data, please modify the 17th to 18th lines in **create_davis_kiba.py** as follows
+If you want to reproduce the first fold data, please modify the 18th to 19th lines in **create_davis_kiba.py** as follows
 ``` python
 train_fold = [ee for e in train_fold1[0:4] for ee in e]
 test_fold = [ee for e in train_fold1[4:5] for ee in e]
 ```
-If you want to reproduce the second fold data, please modify the 17th to 18th lines in **create_davis_kiba.py** as follows
+If you want to reproduce the second fold data, please modify the 18th to 19th lines in **create_davis_kiba.py** as follows
 ``` python
 train_fold2 = [ee for e in train_fold1[0:1] for ee in e]
 train_fold3 = [ee for e in train_fold1[2:5] for ee in e]
@@ -58,14 +58,14 @@ train_fold =train_fold2+train_fold3
 test_fold = [ee for e in train_fold1[1:2] for ee in e]
 ```
 
-If you want to reproduce the third fold data, please modify the 17th to 18th lines in **create_davis_kiba.py** as follows
+If you want to reproduce the third fold data, please modify the 18th to 19th lines in **create_davis_kiba.py** as follows
 ``` python
 train_fold2 = [ee for e in train_fold1[0:2] for ee in e]
 train_fold3 = [ee for e in train_fold1[3:5] for ee in e]
 train_fold =train_fold2+train_fold3
 test_fold = [ee for e in train_fold1[2:3] for ee in e]
 ```
-If you want to reproduce the fourth fold data, please modify the 17th to 18th lines in **create_davis_kiba.py** as follows
+If you want to reproduce the fourth fold data, please modify the 18th to 19th lines in **create_davis_kiba.py** as follows
 ``` python
 train_fold2 = [ee for e in train_fold1[0:3] for ee in e]
 train_fold3 = [ee for e in train_fold1[4:5] for ee in e]
