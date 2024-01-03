@@ -5,7 +5,7 @@
 - **training.py** is used to train the model of the dataset.
 - **utils.py** is a tool class for metrics and transforming data formats.
 - **models/cnn.py** is the neural network defined in this experiment.
-- In the **data** folder, we store the .csv files of our processed Metz and the files of unprocessed Davis and KIBA datasets.
+- In the **data** folder, we store the files of unprocessed Davis and KIBA datasets.
 # Steps to execute the program
 ## 1. Convert data to pytorch format
 If you want to convert the Davis, KIBA into pytorch format, you need to do the following
