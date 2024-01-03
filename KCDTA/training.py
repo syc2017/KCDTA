@@ -41,7 +41,7 @@ def predicting(model, device, loader):
     return total_labels.numpy().flatten(), total_preds.numpy().flatten()
 
 
-datasets = [['davis', 'kiba','metz1','metz2','metz3'][int(sys.argv[1])]]
+datasets = [['davis', 'kiba'][int(sys.argv[1])]]
 modeling = [cnn][int(sys.argv[2])]
 model_st = modeling.__name__
 
