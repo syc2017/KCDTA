@@ -18,7 +18,7 @@ You need to do the following
 ``` python
 python training.py 0 0 0
 ```
-The first argument has five values, *0/1*, representing the ***Davis,KIBA*** datasets.The second argument has only one value, 
+The first argument has two values, *0/1*, representing the ***Davis,KIBA*** datasets.The second argument has only one value, 
 *0*. It represents the use of the convolutional neural network provided in this experiment.The value of the third argument is the value of your cuda index, which has two values of *0/1*. The real CUDA name may vary from these, so please change the following code according to the actual situation.
 ``` python
 cuda_name = "cuda:0"
